@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WinFormsApp11_g_1
+{
+    public partial class Form1 : Form
+    {
+        Triangle triangle;
+
+        public Form1()
+        {
+            InitializeComponent();
+            triangle = new Triangle(0,0,0);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void ProcessTrianglesSides()
+        {
+            try
+            {
+                triangle.A = int.Parse(textBoxASide.Text);
+                triangle.B = int.Parse(textBoxBSide.Text);
+                triangle.C = int.Parse(textBoxCSide.Text);
+
+                labelTriangleToString.Text = triangle.ToString();
+
+                labelTriangleIs.Text = $"Треугольник существует: {(triangle.TriangleIs ? "yes" : "no")}";
+                labelTrianglePerimetr.Text = $"Периметр: {triangle.Perimetr()}";
+                labelTriangleSquare.Text = $"Площадь: {(float.IsNaN(triangle.Square())?"нет ответа":$"{triangle.Square()}")}";
+            }
+            catch
+            {
+                labelTriangleToString.Text = "Ошибка ввода";
+            }
+        }
+        private void textBoxASide_TextChanged(object sender, EventArgs e)
+        {
+            ProcessTrianglesSides();
+        }
+
+        private void textBoxBSide_TextChanged(object sender, EventArgs e)
+        {
+            ProcessTrianglesSides();
+        }
+
+        private void textBoxCSide_TextChanged(object sender, EventArgs e)
+        {
+            ProcessTrianglesSides();
+        }
+    }
+}
